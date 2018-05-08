@@ -2,13 +2,12 @@ version: "2"
 
 services:
   jenkins:
-    build: .
-    privileged: true
+    image: jenkinsci/blueocean
+    user: root
     ports:
       - 8080:8080
       - 50000:50000
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./data:/var/jenkins_home
-
-
-# docker run --name myjenkins -p 8080:8080 -p 50000:50000 --env JAVA_OPTS="-Djava.util.logging.config.file=/var/jenkins_home/log.properties" -v `pwd`/data:/var/jenkins_home
+      - /Users/zhike/Workspaces:/home/jenkins/repositories
